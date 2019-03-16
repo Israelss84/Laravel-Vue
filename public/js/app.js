@@ -29683,7 +29683,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		data:{
 			keeps: [],
 			newKeep: '',
-			errors: []
+			errors: [],
+			fillKeep: {'id': '', 'keep': ''}
 		},
 		methods: {
 			getKeeps(){
@@ -29708,6 +29709,23 @@ return /******/ (function(modules) { // webpackBootstrap
 					$('#crear').modal('hide');
 					toastr.success('Nueva Tarea creada con éxito');
 
+				}).catch( error => {
+					this.errors = error.response.data
+				});
+			},
+			editKeep(keep){
+				this.fillKeep.id = keep.id;
+				this.fillKeep.keep = keep.keep;
+				$('#editar').modal('show');				
+			},
+			updateKeep(id){
+				url = 'tasks/' + id;
+				axios.put(url, this.fillKeep).then(response => {
+					this.getKeeps();
+					this.fillKeep = {'id': '', 'keep': ''};
+					this.errors = [];
+					$('#editar').modal('hide');
+					toastr.success('Tarea actualizada con éxito');
 				}).catch( error => {
 					this.errors = error.response.data
 				});
