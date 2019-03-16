@@ -7,7 +7,7 @@
 			<h1>CRUD Laravel y Vue</h1>
 		</div>
 		<div class="col-7">
-			<a href="#" class="btn btn-primary float-right mb-3">Nueva Tarea</a>
+			<a href="#" class="btn btn-primary float-right mb-3" data-toggle="modal" data-target="#crear">Nueva Tarea</a>
 			<table class="table table-hover table-striped" >
 				<thead>
 					<th>ID</th>
@@ -31,6 +31,42 @@
 				@{{ $data }}
 			</pre>
 		</div>
+
+
+		<!-- Modal -->
+         <form method="POST" v-on:submit.prevent="createKeep">
+
+            <div class="modal fade" id="crear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5>Nueva Tarea</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body"> 
+                            
+                    <div class="form-group">
+                        <label for="keep">Crear Tarea</label>
+                        <input type="text" name="keep" class="form-control" v-model="newKeep">
+                        <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </form>
+
+
+
+
 	</div>
 
 @endsection

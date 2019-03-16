@@ -4,7 +4,9 @@
 			this.getKeeps();//Ejecuta el método al iniciar
 		},
 		data:{
-			keeps: []
+			keeps: [],
+			newKeep: '',
+			errors: []
 		},
 		methods: {
 			getKeeps(){
@@ -18,6 +20,19 @@
 				axios.delete(url).then( response => {					
 					this.getKeeps();
 					toastr.success( 'El ID ' + dato.id + ' fue eliminado correctamente.');
+				});
+			},
+			createKeep(){
+				var urlcreate = "tasks";
+				axios.post(urlcreate, { keep: this.newKeep }).then( response => {
+					this.getKeeps();
+					this.newKeep = "";
+					this.errors = [];
+					$('#crear').modal('hide');
+					toastr.success('Nueva Tarea creada con éxito');
+
+				}).catch( error => {
+					this.errors = error.response.data
 				});
 			}
 		}

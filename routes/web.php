@@ -15,4 +15,4 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::resource('tasks', 'TaskController', ['except' => 'show']); //Coloca todas las rutas excepto show
+Route::resource('tasks', 'TaskController', ['except' => 'show' , 'create', 'edit']); //Coloca todas las rutas excepto show
