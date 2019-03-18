@@ -29710,7 +29710,7 @@ return /******/ (function(modules) { // webpackBootstrap
 					toastr.success('Nueva Tarea creada con éxito');
 
 				}).catch( error => {
-					this.errors = error.response.data
+					this.errors = error.response.data.keep
 				});
 			},
 			editKeep(keep){
